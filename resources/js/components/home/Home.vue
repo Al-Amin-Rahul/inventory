@@ -70,7 +70,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  beforeCreate() {
+    if (!User.isLoggedIn()) {
+      this.$router.push({ name: "/" });
+    }
+  },
+};
 </script>
 
 <style>

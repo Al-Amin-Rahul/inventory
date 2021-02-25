@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Admin\EmployeeController;
 
 Route::group([
 
@@ -17,3 +18,5 @@ Route::group([
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::post('me', [AuthController::class, 'me']);
 });
+
+Route::apiResource('employee', EmployeeController::class);

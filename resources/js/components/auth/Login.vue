@@ -66,7 +66,7 @@ export default {
         .then((response) => {
           User.responseAfterLogin(response);
           this.$router.push({ name: "home" });
-          Sweet.success();
+          Sweet.notification("success", "Successfully Logged In !!");
         })
         .catch();
     },

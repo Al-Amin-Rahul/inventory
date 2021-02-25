@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2'
 class Sweet{
 
-    success(){
+    notification(type, message){
         const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
@@ -15,8 +15,8 @@ class Sweet{
           })
           
           Toast.fire({
-            icon: 'success',
-            title: 'LoggedIn successfully'
+            icon: type,
+            title: message
           })
     }
 }
