@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class EmployeeController extends Controller
 {
@@ -15,7 +16,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        $employees  =   Employee::all();
+        return response()->json($employees);
     }
 
     /**
@@ -26,7 +28,7 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $validator = $request->validate([
             'name' => 'required',
             'email' => 'required|unique:employees,email',
             'address' => 'required',
@@ -38,13 +40,19 @@ class EmployeeController extends Controller
 
         if($request->image){
 
-            $image      =   $request->image;
-            $position   =   strpos($image, ';');
-            $sub        =   substr($image,0,$position);
-            $extension  =   explode('/',$sub)[1];
-            $name       =   "IMG".'_'.time().'.'.$extension;
-            $directory  =   "admin/employee";
-            $imageUrl   =   $directory.'/'.$name;
+            $photo = $request->image;
+
+            $position = strpos($photo, ";");
+            $subString = substr($photo, 0, $position);
+            $extension = explode("/", $subString)[1];
+
+            $imgName = "IMG_" . date("Ymd_his") . "." . $extension;
+            $directory = "admin/employee/".$imgName;
+
+            Image::make($photo)->save($directory);
+
+            
+            // return $imageUrl;
 
             $employee   =   new Employee();
 
@@ -54,7 +62,7 @@ class EmployeeController extends Controller
             $employee->salary       =   $request->salary;
             $employee->join_date    =   $request->join_date;
             $employee->nid          =   $request->nid;
-            $employee->image        =   $imageUrl;
+            $employee->image        =   $directory;
             $employee->save();
         }
 

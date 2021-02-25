@@ -142,12 +142,14 @@ export default {
   methods: {
     addEmployee() {
       axios
-        .post("api/employee/", this.form)
+        .post("api/employee", this.form)
         .then((response) => {
           this.$router.push({ name: "/" });
           Sweet.notification("success", "Employee Inserted !");
         })
-        .catch((error) => (this.errors = error.response.data.errors));
+        .catch((error) => {
+          this.errors = error.response.data.errors;
+        });
     },
     onSelect(event) {
       let file = event.target.files[0];

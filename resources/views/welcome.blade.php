@@ -78,6 +78,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <router-link class="dropdown-item" to="/add-employee">Add Employee</router-link>
+          <router-link class="dropdown-item" to="/employee">Manage Employee</router-link>
         </div>
       </li>
       <li class="nav-item">
