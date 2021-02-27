@@ -6,10 +6,18 @@
         All Employees
       </div>
       <div class="card-body">
+        <div class="col-lg-6 pl-0 pb-4">
+          <input
+            type="search"
+            class="form-control border border-dark"
+            placeholder="Search Employee"
+            v-model="searchKey"
+          />
+        </div>
         <div class="table-responsive">
           <table
             class="table table-bordered"
-            id="dataTable"
+            id=""
             width="100%"
             cellspacing="0"
           >
@@ -36,7 +44,7 @@
               </tr>
             </tfoot>
             <tbody>
-              <tr v-for="employee in employees" :key="employee.id">
+              <tr v-for="employee in filterSearch" :key="employee.id">
                 <td>
                   <img :src="employee.image" alt="" width="50px" /><br />
                   {{ employee.name }}
@@ -47,11 +55,18 @@
                 <td>{{ employee.join_date }}</td>
                 <td>{{ employee.nid }}</td>
                 <td>
-                  <router-link to="" class="btn btn-primary"
+                  <router-link
+                    :to="{
+                      name: '/edit-employee',
+                      params: { id: employee.id },
+                    }"
+                    class="btn btn-primary"
                     ><i class="fas fa-plus"></i></router-link
-                  ><router-link to="" class="btn btn-danger"
+                  ><a
+                    @click="deleteEmployee(employee.id)"
+                    class="btn btn-danger"
                     ><i class="fas fa-trash"></i
-                  ></router-link>
+                  ></a>
                 </td>
               </tr>
             </tbody>
@@ -71,7 +86,8 @@ export default {
   },
   data() {
     return {
-      employees: {},
+      employees: [],
+      searchKey: "",
     };
   },
   methods: {
@@ -80,9 +96,38 @@ export default {
         .get("api/employee/")
         .then((response) => {
           this.employees = response.data;
-          console.log(response.data);
         })
         .catch();
+    },
+    deleteEmployee(id) {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios
+            .delete("/api/employee/" + id)
+            .then((response) => {
+              this.employees = this.employees.filter((employee) => {
+                return employee.id != id;
+              });
+            })
+            .catch();
+          Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        }
+      });
+    },
+  },
+  computed: {
+    filterSearch() {
+      return this.employees.filter((employee) => {
+        return employee.email.match(this.searchKey);
+      });
     },
   },
   created() {
@@ -92,7 +137,4 @@ export default {
 </script>
 
 <style>
-.odd {
-  display: none !important;
-}
 </style>

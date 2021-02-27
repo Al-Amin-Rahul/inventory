@@ -2,12 +2,15 @@
   <div>
     <div class="container">
       <div class="alert bg-dark text-white shadow">
-        <i class="fas fa-users"></i> Add Employee
+        <i class="fas fa-users"></i> Update Employee
       </div>
       <div class="row">
         <div class="col-lg-12">
           <div class="wrap shadow rounded p-3">
-            <form enctype="maltipart/form-data" @submit.prevent="addEmployee">
+            <form
+              enctype="maltipart/form-data"
+              @submit.prevent="updateEmployee"
+            >
               <div class="row">
                 <div class="col-lg-6">
                   <div class="form-group">
@@ -58,8 +61,8 @@
                       id="image"
                       @change="onSelect"
                     />
-                    <small class="text-danger" v-if="errors.image">{{
-                      errors.image[0]
+                    <small class="text-danger" v-if="errors.new_image">{{
+                      errors.new_image[0]
                     }}</small>
                   </div>
                 </div>
@@ -104,13 +107,22 @@
                     }}</small>
                   </div>
                   <div class="form-group">
-                    <label for="preview"></label>
-                    <img :src="form.image" alt="" id="preview" width="50px" />
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <br />
+                        <img
+                          :src="form.image"
+                          alt=""
+                          id="preview"
+                          width="50px"
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <button type="submit" class="form-control btn bg-success">
-                Save Employee
+                Update Employee
               </button>
             </form>
           </div>
@@ -127,6 +139,15 @@ export default {
       this.$router.push({ name: "/" });
     }
   },
+  created() {
+    let id = this.$route.params.id;
+    axios
+      .get("/api/employee/" + id)
+      .then((response) => {
+        this.form = response.data;
+      })
+      .catch();
+  },
   data() {
     return {
       form: {
@@ -137,17 +158,20 @@ export default {
         join_date: "",
         nid: "",
         image: "",
+        new_image: "",
       },
       errors: {},
     };
   },
   methods: {
-    addEmployee() {
+    image() {},
+    updateEmployee() {
+      let id = this.$route.params.id;
       axios
-        .post("/api/employee", this.form)
+        .put("/api/employee/" + id, this.form)
         .then((response) => {
           this.$router.push({ name: "/employee" });
-          Sweet.notification("success", "Employee Inserted !");
+          Sweet.notification("success", "Employee Updated !");
         })
         .catch((error) => {
           this.errors = error.response.data.errors;
@@ -155,6 +179,7 @@ export default {
     },
     onSelect(event) {
       let file = event.target.files[0];
+
       if (file.size > 10240000) {
         Sweet.notification("warning", "Upload Image Less Than 10MB");
       } else {

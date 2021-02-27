@@ -11,8 +11,8 @@ import User from './Helpers/User'
 window.User = User
 
 // swal
-// import Swal from 'sweetalert2'
-// window.Swal = Swal
+import Swal from 'sweetalert2'
+window.Swal = Swal
 
 import Sweet from './Helpers/Sweet'
 window.Sweet = Sweet
