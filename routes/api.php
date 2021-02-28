@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\SuplierController;
+use App\Http\Controllers\Admin\CategoryController;
 
 Route::group([
 
@@ -22,3 +23,4 @@ Route::group([
 
 Route::apiResource('employee', EmployeeController::class);
 Route::apiResource('suplier', SuplierController::class);
+Route::apiResource('category', CategoryController::class);

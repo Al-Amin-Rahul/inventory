@@ -5,9 +5,12 @@ let logout             =   require('./components/auth/Logout').default;
 let addEmployee        =   require('./components/employee/AddEmployee').default;
 let manageEmployee     =   require('./components/employee/ManageEmployee').default;
 let editEmployee       =   require('./components/employee/EditEmployee').default;
-let addSuplier        =   require('./components/supplier/AddSuplier').default;
-let manageSuplier     =   require('./components/supplier/ManageSuplier').default;
-let editSuplier       =   require('./components/supplier/EditSuplier').default;
+let addSuplier         =   require('./components/supplier/AddSuplier').default;
+let manageSuplier      =   require('./components/supplier/ManageSuplier').default;
+let editSuplier        =   require('./components/supplier/EditSuplier').default;
+let addCategory        =   require('./components/category/AddCategory').default;
+let manageCategory     =   require('./components/category/ManageCategory').default;
+let editCategory       =   require('./components/category/EditCategory').default;
 
 export const routes = [
     { path: '/', component: login, name: '/' },
@@ -20,5 +23,8 @@ export const routes = [
     { path: '/add-suplier', component: addSuplier, name: 'add-suplier' },
     { path: '/suplier', component: manageSuplier, name: 'suplier' },
     { path: '/edit-suplier/:id', component: editSuplier, name: 'edit-suplier' },
+    { path: '/add-category', component: addCategory, name: 'add-category' },
+    { path: '/category', component: manageCategory, name: 'category' },
+    { path: '/edit-category/:id', component: editCategory, name: 'edit-category' },
 
   ]
