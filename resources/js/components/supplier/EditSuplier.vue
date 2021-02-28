@@ -2,15 +2,12 @@
   <div>
     <div class="container">
       <div class="alert bg-dark text-white shadow">
-        <i class="fas fa-users"></i> Update Employee
+        <i class="fas fa-users"></i> Update Suplier
       </div>
       <div class="row">
         <div class="col-lg-12">
           <div class="wrap shadow rounded p-3">
-            <form
-              enctype="maltipart/form-data"
-              @submit.prevent="updateEmployee"
-            >
+            <form enctype="maltipart/form-data" @submit.prevent="updateSuplier">
               <div class="row">
                 <div class="col-lg-6">
                   <div class="form-group">
@@ -40,33 +37,45 @@
                     }}</small>
                   </div>
                   <div class="form-group">
-                    <label for="join">Join Date</label>
-                    <input
-                      type="date"
-                      name="join_date"
-                      id="join"
-                      class="form-control"
-                      v-model="form.join_date"
-                    />
-                    <small class="text-danger" v-if="errors.join_date">{{
-                      errors.join_date[0]
-                    }}</small>
-                  </div>
-                  <div class="form-group">
-                    <label for="image">Image</label>
-                    <input
-                      type="file"
-                      name="image"
-                      class="form-control bg-primary"
-                      id="image"
-                      @change="onSelect"
-                    />
-                    <small class="text-danger" v-if="errors.new_image">{{
-                      errors.new_image[0]
-                    }}</small>
+                    <div class="row">
+                      <div class="col-lg-10">
+                        <label for="image">Image</label>
+                        <input
+                          type="file"
+                          name="image"
+                          class="form-control bg-primary"
+                          id="image"
+                          @change="onSelect"
+                        />
+                        <small class="text-danger" v-if="errors.image">{{
+                          errors.image[0]
+                        }}</small>
+                      </div>
+                      <div class="col-lg-2">
+                        <img
+                          :src="form.image"
+                          alt=""
+                          id="preview"
+                          width="50px"
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="col-lg-6">
+                  <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input
+                      type="number"
+                      name="phone"
+                      id="phone"
+                      class="form-control"
+                      v-model="form.phone"
+                    />
+                    <small class="text-danger" v-if="errors.phone">{{
+                      errors.phone[0]
+                    }}</small>
+                  </div>
                   <div class="form-group">
                     <label for="email">Email</label>
                     <input
@@ -81,48 +90,22 @@
                     }}</small>
                   </div>
                   <div class="form-group">
-                    <label for="salary">Salary</label>
+                    <label for="shop">Shop</label>
                     <input
-                      type="number"
-                      name="salary"
-                      id="salary"
+                      type="text"
+                      name="shop"
+                      id="shop"
                       class="form-control"
-                      v-model="form.salary"
+                      v-model="form.shop"
                     />
-                    <small class="text-danger" v-if="errors.salary">{{
-                      errors.salary[0]
+                    <small class="text-danger" v-if="errors.shop">{{
+                      errors.shop[0]
                     }}</small>
-                  </div>
-                  <div class="form-group">
-                    <label for="nid">NID</label>
-                    <input
-                      type="number"
-                      name="nid"
-                      id="nid"
-                      class="form-control"
-                      v-model="form.nid"
-                    />
-                    <small class="text-danger" v-if="errors.nid">{{
-                      errors.nid[0]
-                    }}</small>
-                  </div>
-                  <div class="form-group">
-                    <div class="row">
-                      <div class="col-lg-6">
-                        <br />
-                        <img
-                          :src="form.image"
-                          alt=""
-                          id="preview"
-                          width="50px"
-                        />
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
               <button type="submit" class="form-control btn bg-success">
-                Update Employee
+                Update Suplier
               </button>
             </form>
           </div>
@@ -142,7 +125,7 @@ export default {
   created() {
     let id = this.$route.params.id;
     axios
-      .get("/api/employee/" + id)
+      .get("/api/suplier/" + id)
       .then((response) => {
         this.form = response.data;
       })
@@ -152,27 +135,24 @@ export default {
     return {
       form: {
         name: "",
+        phone: "",
         email: "",
         address: "",
-        salary: "",
-        join_date: "",
-        nid: "",
+        shop: "",
         image: "",
         new_image: "",
       },
-
       errors: {},
     };
   },
   methods: {
-    image() {},
-    updateEmployee() {
+    updateSuplier() {
       let id = this.$route.params.id;
       axios
-        .put("/api/employee/" + id, this.form)
+        .put("/api/suplier/" + id, this.form)
         .then((response) => {
-          this.$router.push({ name: "employee" });
-          Sweet.notification("success", "Employee Updated !");
+          this.$router.push({ name: "suplier" });
+          Sweet.notification("success", "Suplier Updated !");
         })
         .catch((error) => {
           this.errors = error.response.data.errors;
@@ -180,7 +160,6 @@ export default {
     },
     onSelect(event) {
       let file = event.target.files[0];
-
       if (file.size > 10240000) {
         Sweet.notification("warning", "Upload Image Less Than 10MB");
       } else {

@@ -3,14 +3,14 @@
     <div class="card mb-3">
       <div class="card-header bg-dark text-white">
         <i class="fas fa-table"></i>
-        All Employees
+        Manage Suplier
       </div>
       <div class="card-body">
         <div class="col-lg-6 pl-0 pb-4">
           <input
             type="search"
             class="form-control border border-dark"
-            placeholder="Search Employee"
+            placeholder="Search Suplier"
             v-model="searchKey"
           />
         </div>
@@ -24,47 +24,42 @@
             <thead class="bg-info">
               <tr>
                 <th>Name</th>
+                <th>Phone</th>
                 <th>Email</th>
                 <th>Address</th>
-                <th>Salary</th>
-                <th>Join date</th>
-                <th>NID</th>
+                <th>Shop</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tfoot class="bg-info">
               <tr>
                 <th>Name</th>
+                <th>Phone</th>
                 <th>Email</th>
                 <th>Address</th>
-                <th>Salary</th>
-                <th>Join date</th>
-                <th>NID</th>
+                <th>Shop</th>
                 <th>Action</th>
               </tr>
             </tfoot>
             <tbody>
-              <tr v-for="employee in filterSearch" :key="employee.id">
+              <tr v-for="suplier in filterSearch" :key="suplier.id">
                 <td>
-                  <img :src="employee.image" alt="" width="50px" /><br />
-                  {{ employee.name }}
+                  <img :src="suplier.image" alt="" width="50px" /><br />
+                  {{ suplier.name }}
                 </td>
-                <td>{{ employee.email }}</td>
-                <td>{{ employee.address }}</td>
-                <td>{{ employee.salary }}</td>
-                <td>{{ employee.join_date }}</td>
-                <td>{{ employee.nid }}</td>
+                <td>{{ suplier.phone }}</td>
+                <td>{{ suplier.email }}</td>
+                <td>{{ suplier.address }}</td>
+                <td>{{ suplier.shop }}</td>
                 <td>
                   <router-link
                     :to="{
-                      name: 'edit-employee',
-                      params: { id: employee.id },
+                      name: 'edit-suplier',
+                      params: { id: suplier.id },
                     }"
                     class="btn btn-primary"
                     ><i class="fas fa-plus"></i></router-link
-                  ><a
-                    @click="deleteEmployee(employee.id)"
-                    class="btn btn-danger"
+                  ><a @click="deleteSuplier(suplier.id)" class="btn btn-danger"
                     ><i class="fas fa-trash"></i
                   ></a>
                 </td>
@@ -86,20 +81,20 @@ export default {
   },
   data() {
     return {
-      employees: [],
+      supliers: [],
       searchKey: "",
     };
   },
   methods: {
-    allEmployees() {
+    allSupliers() {
       axios
-        .get("api/employee/")
+        .get("api/suplier/")
         .then((response) => {
-          this.employees = response.data;
+          this.supliers = response.data;
         })
         .catch();
     },
-    deleteEmployee(id) {
+    deleteSuplier(id) {
       Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
@@ -111,10 +106,10 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           axios
-            .delete("/api/employee/" + id)
+            .delete("/api/suplier/" + id)
             .then((response) => {
-              this.employees = this.employees.filter((employee) => {
-                return employee.id != id;
+              this.supliers = this.supliers.filter((suplier) => {
+                return suplier.id != id;
               });
             })
             .catch();
@@ -125,13 +120,13 @@ export default {
   },
   computed: {
     filterSearch() {
-      return this.employees.filter((employee) => {
-        return employee.email.match(this.searchKey);
+      return this.supliers.filter((suplier) => {
+        return suplier.email.match(this.searchKey);
       });
     },
   },
   created() {
-    this.allEmployees();
+    this.allSupliers();
   },
 };
 </script>
