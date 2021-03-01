@@ -21,7 +21,7 @@
           <router-link class="dropdown-item" to="/suplier">Manage Supliers</router-link>
         </div>
       </li>
-    {{-- Suppliers --}}
+    {{-- Category --}}
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="Category" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-fw fa-folder"></i>
@@ -30,6 +30,17 @@
         <div class="dropdown-menu" aria-labelledby="Category">
           <router-link class="dropdown-item" to="/add-category">Add Category</router-link>
           <router-link class="dropdown-item" to="/category">Manage Category</router-link>
+        </div>
+      </li>
+    {{-- Product --}}
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="Product" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Product</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="Product">
+          <router-link class="dropdown-item" to="/add-product">Add Product</router-link>
+          <router-link class="dropdown-item" to="/product">Manage Product</router-link>
         </div>
       </li>
     <li class="nav-item">

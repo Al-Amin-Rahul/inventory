@@ -146,7 +146,7 @@ export default {
       axios
         .post("/api/employee", this.form)
         .then((response) => {
-          this.$router.push({ name: "/employee" });
+          this.$router.push({ name: "employee" });
           Sweet.notification("success", "Employee Inserted !");
         })
         .catch((error) => {

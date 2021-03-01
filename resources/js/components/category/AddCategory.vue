@@ -15,6 +15,9 @@
                   id=""
                   v-model="form.category_name"
                 />
+                <small class="text-danger" v-if="errors.category_name">{{
+                  errors.category_name[0]
+                }}</small>
               </div>
               <button class="btn btn-success">Save Category</button>
             </div>
@@ -37,6 +40,7 @@ export default {
       form: {
         category_name: "",
       },
+      errors: {},
     };
   },
   methods: {
@@ -47,7 +51,9 @@ export default {
           this.$router.push({ name: "category" });
           Sweet.notification("success", "Category Inserted");
         })
-        .catch();
+        .catch((error) => {
+          this.errors = error.response.data.errors;
+        });
     },
   },
 };
