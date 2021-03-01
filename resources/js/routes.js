@@ -14,6 +14,9 @@ let editCategory       =   require('./components/category/EditCategory').default
 let addProduct         =   require('./components/product/AddProduct').default;
 let editProduct        =   require('./components/product/EditProduct').default;
 let manageProduct      =   require('./components/product/ManageProduct').default;
+let addExpense         =   require('./components/expense/AddExpense').default;
+let editExpense        =   require('./components/expense/EditExpense').default;
+let manageExpense      =   require('./components/expense/ManageExpense').default;
 
 export const routes = [
     { path: '/', component: login, name: '/' },
@@ -32,5 +35,9 @@ export const routes = [
     { path: '/add-product', component: addProduct, name: 'add-product' },
     { path: '/product', component: manageProduct, name: 'product' },
     { path: '/edit-product/:id', component: editProduct, name: 'edit-product' },
+    { path: '/add-expense', component: addExpense, name: 'add-expense' },
+    { path: '/expense', component: manageExpense, name: 'expense' },
+    { path: '/edit-expense/:id', component: editExpense, name: 'edit-expense' },
+
 
   ]

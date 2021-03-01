@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\SuplierController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ExpenseController;
 
 Route::group([
 
@@ -26,3 +27,4 @@ Route::apiResource('employee', EmployeeController::class);
 Route::apiResource('suplier', SuplierController::class);
 Route::apiResource('category', CategoryController::class);
 Route::apiResource('product', ProductController::class);
+Route::apiResource('expense', ExpenseController::class);

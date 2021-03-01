@@ -43,6 +43,17 @@
           <router-link class="dropdown-item" to="/product">Manage Product</router-link>
         </div>
       </li>
+    {{-- Expense --}}
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="Expense" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Expense</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="Expense">
+          <router-link class="dropdown-item" to="/add-expense">Add Expense</router-link>
+          <router-link class="dropdown-item" to="/expense">Manage Expense</router-link>
+        </div>
+      </li>
     <li class="nav-item">
       <a class="nav-link" href="charts.html">
         <i class="fas fa-fw fa-chart-area"></i>
