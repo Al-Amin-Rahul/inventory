@@ -54,14 +54,20 @@
           <router-link class="dropdown-item" to="/expense">Manage Expense</router-link>
         </div>
       </li>
+    {{-- Salary --}}
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="Salary" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Salary</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="Expense">
+          <router-link class="dropdown-item" to="/add-salary">Add Salary</router-link>
+          <router-link class="dropdown-item" to="/salary">Manage Salary</router-link>
+        </div>
+      </li>
     <li class="nav-item">
-      <a class="nav-link" href="charts.html">
-        <i class="fas fa-fw fa-chart-area"></i>
-        <span>Charts</span></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="tables.html">
+      <router-link class="nav-link" to="/stock">
         <i class="fas fa-fw fa-table"></i>
-        <span>Tables</span></a>
+        <span>Stock</span></router-link>
     </li>
   </ul>

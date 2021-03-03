@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\SuplierController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ExpenseController;
+use App\Http\Controllers\Admin\SalaryController;
 
 Route::group([
 
@@ -28,3 +29,8 @@ Route::apiResource('suplier', SuplierController::class);
 Route::apiResource('category', CategoryController::class);
 Route::apiResource('product', ProductController::class);
 Route::apiResource('expense', ExpenseController::class);
+
+Route::Post('store-salary', [SalaryController::class, 'storeSalary']);
+Route::Get('all-salary', [SalaryController::class, 'allSalary']);
+Route::Get('view-salary/{id}', [SalaryController::class, 'viewSalary']);
+Route::Put('update-stock/{id}', [SalaryController::class, 'updateStock']);

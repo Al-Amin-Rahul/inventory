@@ -17,6 +17,13 @@ let manageProduct      =   require('./components/product/ManageProduct').default
 let addExpense         =   require('./components/expense/AddExpense').default;
 let editExpense        =   require('./components/expense/EditExpense').default;
 let manageExpense      =   require('./components/expense/ManageExpense').default;
+let addSalary          =   require('./components/salary/AddSalary').default;
+let manageSalary       =   require('./components/salary/ManageSalary').default;
+let editSalary         =   require('./components/salary/EditSalary').default;
+let paySalary          =   require('./components/salary/PaySalary').default;
+let viewSalary         =   require('./components/salary/ViewSalary').default;
+let stock              =   require('./components/stock/Stock').default;
+let editStock          =   require('./components/stock/EditStock').default;
 
 export const routes = [
     { path: '/', component: login, name: '/' },
@@ -38,6 +45,12 @@ export const routes = [
     { path: '/add-expense', component: addExpense, name: 'add-expense' },
     { path: '/expense', component: manageExpense, name: 'expense' },
     { path: '/edit-expense/:id', component: editExpense, name: 'edit-expense' },
-
+    { path: '/add-salary', component: addSalary, name: 'add-salary' },
+    { path: '/salary', component: manageSalary, name: 'salary' },
+    { path: '/edit-salary/:id', component: editSalary, name: 'edit-salary' },
+    { path: '/pay-salary/:id', component: paySalary, name: 'pay-salary' },
+    { path: '/view-salary/:id', component: viewSalary, name: 'view-salary' },
+    { path: '/stock', component: stock, name: 'stock' },
+    { path: '/edit-stock/:id', component: editStock, name: 'edit-stock' },
 
   ]
